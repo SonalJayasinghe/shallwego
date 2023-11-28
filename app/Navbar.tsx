@@ -54,7 +54,7 @@ const Navbar = () => {
           )}
         </nav>
       </div>
-     
+      {showLogin && <CustomLogin onClose={() => setShowLogin(false)} />}
     </>
   );
 };
