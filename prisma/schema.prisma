@@ -11,18 +11,18 @@ datasource db {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String  @map("provider_account_id")
-  refresh_token      String? @db.Text
-  access_token       String? @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String? @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -41,14 +41,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
+  id             String    @id @default(cuid())
+  name           String?
+  email          String?   @unique
   hashedPassword String?
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  emailVerified  DateTime? @map("email_verified")
+  image          String?
+  accounts       Account[]
+  sessions       Session[]
+  posts          Post[]
 
   @@map("users")
 }
@@ -60,4 +61,21 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+model Post {
+  id       String  @id @default(cuid())
+  name     String
+  partner  String
+  status   STATUS @default(WAITING)
+  imageUrl String?
+  user     User    @relation(fields: [email], references: [email], onDelete: Cascade)
+  email   String @unique
+  createdAt DateTime @default(now())
+}
+
+enum STATUS {
+  WAITING
+  APPROVED
+  REJECTED
 }

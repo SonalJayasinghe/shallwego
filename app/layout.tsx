@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Theme } from "@radix-ui/themes";
 import AuthProvider from "./api/auth/provider";
+
+import { EdgeStoreProvider } from "./lib/edgestore";
 import Navbar from "./Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,7 +30,9 @@ export default function RootLayout({
             </div>
 
             <main className="p-10 bg-slate-50 min-h-screen pt-[100px] grid grid-cols-12">
-              <div className=" col-span-12">{children}</div>
+              <div className=" col-span-12">
+                <EdgeStoreProvider>{children}</EdgeStoreProvider>
+              </div>
             </main>
           </Theme>
         </AuthProvider>
