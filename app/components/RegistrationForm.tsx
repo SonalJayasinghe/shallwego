@@ -1,18 +1,13 @@
-import { Button, Flex, Text, TextField } from "@radix-ui/themes";
+import { Button, Checkbox, Flex, Text, TextField } from "@radix-ui/themes";
+import Link from "next/link";
 import axios, { AxiosError } from "axios";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { Dispatch, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { BiLoaderCircle } from "react-icons/bi";
-import { useEdgeStore } from "../lib/edgestore";
-import { SingleImageDropzone } from "./SingleImageDropZone";
-import { Post } from "@prisma/client";
-
 
 const RegistrationForm = () => {
-
   const [isSubmiting, setSubmiting] = useState(false);
 
   //Form and edgestore
@@ -26,15 +21,14 @@ const RegistrationForm = () => {
 
   //Handling the onsubmit event
   const onHandleSubmit = handleSubmit(async (data) => {
-
-      try {
-        await axios.post("/api/register", data);
-        reset();            
-        toast.success(" Account Created Succesfully. Please Sign In");
-      } catch(error){
-        if(error instanceof AxiosError){
+    try {
+      await axios.post("/api/register", data);
+      reset();
+      toast.success(" Account Created Succesfully. Please Sign In");
+    } catch (error) {
+      if (error instanceof AxiosError) {
         if (error.response && error.response.status === 400) {
-          if (error.response.data.error === 'User already exists') {
+          if (error.response.data.error === "User already exists") {
             toast.error("Email Already Exists");
           }
         } else {
@@ -42,14 +36,13 @@ const RegistrationForm = () => {
         }
       }
       router.refresh();
-      }
+    }
   });
 
   return (
     <>
       <form onSubmit={onHandleSubmit}>
         <Flex direction="column" gap="3">
-         
           <TextField.Input
             radius="full"
             placeholder=" Your Email"
@@ -81,7 +74,14 @@ const RegistrationForm = () => {
             </Text>
           )}
 
-
+          <Flex direction="column" gap="3">
+            <Text as="label" size="2">
+              <Flex gap="2">
+                <Checkbox size="1" required/> Agree to <Link href={'/termsandcondition'}>Terms and
+                Conditions </Link>
+              </Flex>
+            </Text>
+          </Flex>
           <Button disabled={isSubmiting}>
             {isSubmiting ? (
               <>
