@@ -7,6 +7,8 @@ import AuthProvider from "./api/auth/provider";
 
 import { EdgeStoreProvider } from "./lib/edgestore";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
+import QueryClientProvider from "./QueryClientProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,19 +25,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProvider>
-          <Theme accentColor="crimson" radius="full">
-            <div>
-              <Navbar />
-            </div>
-
-            <main className="p-10 bg-slate-50 min-h-screen pt-[100px] grid grid-cols-12">
-              <div className=" col-span-12">
-                <EdgeStoreProvider>{children}</EdgeStoreProvider>
+        <QueryClientProvider>
+          <AuthProvider>
+            <Theme accentColor="crimson" radius="full">
+              <div>
+                <Navbar />
               </div>
-            </main>
-          </Theme>
-        </AuthProvider>
+
+              <main className="p-10 bg-slate-50 min-h-screen pt-[100px] grid grid-cols-12">
+                <div className=" col-span-12">
+                  <EdgeStoreProvider>{children}</EdgeStoreProvider>
+                </div>
+              </main>
+              <Footer />
+            </Theme>
+          </AuthProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );

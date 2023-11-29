@@ -14,8 +14,6 @@ interface Props {
 }
 
 const Form = ({ setOpen }: Props) => {
-  
-
   //Navigation and Session
   const session = useSession();
   const router = useRouter();
@@ -37,7 +35,7 @@ const Form = ({ setOpen }: Props) => {
   //Handling the onsubmit event
   const onHandleSubmit = handleSubmit(async (data) => {
     if (file) {
-      const res = await edgestore.publicPetImages.upload({
+      const res = await edgestore.publicImages.upload({
         file,
         onProgressChange: (progress) => {
           if (progress !== 100) setIsUploading(true);
@@ -68,7 +66,6 @@ const Form = ({ setOpen }: Props) => {
     <>
       <form onSubmit={onHandleSubmit}>
         <Flex direction="column" gap="3">
-
           {/* Pet Name  */}
           <TextField.Input
             disabled={isUploading}
@@ -89,9 +86,9 @@ const Form = ({ setOpen }: Props) => {
           <TextField.Input
             disabled={isUploading}
             radius="full"
-            placeholder=" Your Name"
+            placeholder=" To be Partner Name"
             {...register("partner", {
-              required: "* Your Partner Name is Required",
+              required: "* Your To be Partners Name is Required",
             })}
           />
           {errors.partner && (

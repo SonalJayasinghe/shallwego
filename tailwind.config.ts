@@ -7,7 +7,7 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    fontFamily:{
+    fontFamily: {
       'sans': ['ui-sans-serif', 'system-ui'],
       'serif': ['ui-serif', 'Georgia'],
       'mono': ['ui-monospace', 'SFMono-Regular'],
@@ -20,6 +20,12 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+    },
+    screens: {
+      'sm': '760px',
+      'md': '1060px',
+      'lg': '1250px',
+      'xl': '1920px'
     },
   },
   plugins: [],

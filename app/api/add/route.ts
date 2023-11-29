@@ -6,8 +6,8 @@ import z from 'zod';
 
 const schema = z.object({
     email: z.string().email(),   
-    name: z.string(),
-    partner: z.string(),
+    name: z.string().min(1),
+    partner: z.string().min(1),
     imageUrl: z.string().url(), 
 });
 
