@@ -20,16 +20,15 @@ const Navbar = () => {
             <div className="hidden sm:flex"></div>
           </div>
           <div className=" flex items-center gap-4">
+            <Link
+              href={"/admin"}
+              className=" font-medium hover:text-pink-600 transition-colors"
+            >
+              {" "}
+              Dashboard{" "}
+            </Link>
             {session?.user?.email ? (
               <>
-                <Link
-                  href={"/admin"}
-                  className=" font-medium hover:text-pink-600 transition-colors"
-                >
-                  {" "}
-                  Dashboard{" "}
-                </Link>
-
                 <DropdownMenu.Root>
                   <DropdownMenu.Trigger>
                     <div className=" cursor-pointer">
@@ -48,19 +47,11 @@ const Navbar = () => {
               </>
             ) : (
               <div className=" flex space-x-4 justify-center items-center">
-                <Link
-                  href=""
-                  className=" font-medium hover:text-pink-600 transition-colors"
-                  onClick={() => setShowLogin(!showLogin)}
-                >
-                  {" "}
-                  Sign In{" "}
-                </Link>{" "}
                 <Button>
                   {" "}
-                  <Link href={""} onClick={() => setShowLogin(!showLogin)}>
+                  <Link href={"/auth"} onClick={() => setShowLogin(!showLogin)}>
                     {" "}
-                    Register{" "}
+                    Sign In{" "}
                   </Link>{" "}
                 </Button>
               </div>

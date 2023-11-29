@@ -18,14 +18,16 @@ export const AuthOptions: NextAuthOptions =
                 if (!credentials?.email || !credentials?.password) return null;
                 const user = await prisma.user.findUnique({ where: { email: credentials.email } });
 
-                if(!user) return null;
+                if (!user) return null;
                 const passwordMatch = await bcrypt.compare(credentials.password, user.hashedPassword!);
-                return passwordMatch? user : null;
+                return passwordMatch ? user : null;
             },
-            
+
         }),
     ],
     session: { strategy: "jwt" },
-  
+    pages: {
+        signIn: "/auth",
+    },
 }
 

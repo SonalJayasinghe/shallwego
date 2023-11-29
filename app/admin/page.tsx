@@ -1,19 +1,16 @@
 "use client";
-import { Box, Button, Card, Flex, Text } from "@radix-ui/themes";
-import { FaHeart } from "react-icons/fa";
-import { GiAmpleDress } from "react-icons/gi";
-import { IoIosBowtie } from "react-icons/io";
-import CreatePost from "../components/CreatePost";
-import copy from "copy-to-clipboard";
-import PostCard from "../components/Post";
-import axios from "axios";
 import { Post } from "@prisma/client";
+import { Button, Text } from "@radix-ui/themes";
+import axios from "axios";
+import copy from "copy-to-clipboard";
 import { useEffect, useState } from "react";
-import { BiLoaderCircle } from "react-icons/bi";
 import toast, { Toaster } from "react-hot-toast";
+import { BiLoaderCircle } from "react-icons/bi";
+import CreatePost from "../components/CreatePost";
+import PostCard from "../components/Post";
 import { useEdgeStore } from "../lib/edgestore";
-import StatusCard from "./StatusCard";
 import CountCard from "./CountCard";
+import StatusCard from "./StatusCard";
 
 export const Admin = () => {
   const [post, setPost] = useState<Post | null>(null);
@@ -31,11 +28,11 @@ export const Admin = () => {
         .catch((error) => {
           console.error("Error deleting image:", error);
         });
-      toast.success(" Post Deleted Successfully");
+      toast.success(" Askout Deleted Successfully");
       setPost(null);
       setDisabled(false);
     } catch (error) {
-      toast.error(" Error Deleting Post");
+      toast.error(" Error Deleting Askout");
     }
   };
 
@@ -52,7 +49,7 @@ export const Admin = () => {
   return (
     <>
       <div className="grid md:grid-cols-2 gap-4 pl-5 pr-5 justify-center items-center mb-5">
-        <div className="flex flex-col space-y-3 items-center w-full h-full rounded-3xl bg-gradient-to-r from-pink-50 to-pink-100 justify-center p-3">
+        <div className="flex flex-col space-y-2 items-center w-full min-h-[200px] rounded-3xl bg-gradient-to-r from-pink-50 to-pink-100 justify-center p-3">
           {!post && (
             <CreatePost
               setPost={(post: Post) => setPost(post)}
@@ -61,7 +58,9 @@ export const Admin = () => {
           )}
           {post && (
             <>
-              <Text> Copy the link and send to the partner </Text>
+              { (post.status === 'WAITING' || post.status === 'APPROVED') && <Text align={'center'}> Copy the link and send to the partner </Text>}
+              { post.status === 'REJECTED' && <Text align={'center'}> Delete the current Askout to create a new Askout </Text>}
+
 
               <div className=" flex flex-row gap-3 justify-between">
                 <Button
@@ -74,7 +73,8 @@ export const Admin = () => {
                   Copy Link{" "}
                 </Button>
                 <Button
-                  disabled={disabled}
+                  disabled={disabled || post.status === 'APPROVED'}
+
                   variant={"surface"}
                   onClick={async () => {
                     setDisabled(true);
@@ -91,7 +91,7 @@ export const Admin = () => {
             <CountCard/>
         </div>
 
-        <StatusCard />
+        <StatusCard status={post?.status || 'DEFAULT'}/>
       </div>
 
       <div className="flex justify-center items-center mt-10">

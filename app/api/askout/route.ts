@@ -16,6 +16,14 @@ export async function GET(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
     const session = await getServerSession();
     if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const checkPost = await prisma.post.findUnique({
+        where: {
+            email: session?.user?.email!
+        }
+    });
+    if (!checkPost) return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+    if (checkPost.status === 'APPROVED') return NextResponse.json({ error: 'Approved Posts Cannot Delete' }, { status: 400 });
+
     const post = await prisma.post.delete({
         where: {
             email: session?.user?.email!

@@ -71,7 +71,6 @@ const Form = ({ setOpen, setPost }: Props) => {
     <>
       <form onSubmit={onHandleSubmit}>
         <Flex direction="column" gap="3">
-          {/* Pet Name  */}
           <TextField.Input
             disabled={isUploading}
             radius="full"
@@ -87,7 +86,6 @@ const Form = ({ setOpen, setPost }: Props) => {
             </Text>
           )}
 
-          {/* Pet Name  */}
           <TextField.Input
             disabled={isUploading}
             radius="full"

@@ -17,6 +17,7 @@ const PostPage = async ({ params }: Props) => {
     <>
       {post && (
         <PostCard
+          id={post.id}
           name={post?.name}
           partner={post.partner}
           imageUrl={post.imageUrl!}

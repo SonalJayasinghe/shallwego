@@ -1,17 +1,62 @@
 "use client";
 import heroBG from "@/public/images/BGImage.webp";
 import { Avatar, Button, Flex, Text } from "@radix-ui/themes";
+import axios, { AxiosError } from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+
 
 interface Props {
+  id?: string;
   name: string;
   partner: string;
   imageUrl: string;
   status: string;
 }
 
-const PostCard = ({ name, partner, imageUrl, status }: Props) => {
+const PostCard = ({ name, partner, imageUrl, status, id }: Props) => {
+  const router = useRouter();
+  const onApprove = async (id: string) => {
+    try {
+      const data = await axios.patch(`/api/acceptance/${id}`, { status: "APPROVED" })
+      //catch the error text from the api
+      router.push(`/askout/${id}`);
+      router.refresh();
+    } catch(error) {
+      if(error instanceof AxiosError){
+      if (error.response && error.response.status === 403) {
+        if (error.response.data.error === 'You cannot approve or reject your own post') {
+          toast.error("Sorry! You cannot Aprove or Reject Your Own Post");
+        }
+      } else {
+        // handle other errors...
+      }
+    }
+    }
+  };
+
+  const onReject = async (id: string) => {
+    try {
+      const data = await axios.patch(`/api/acceptance/${id}`, { status: "REJECTED" })
+      //catch the error text from the api
+      router.push(`/askout/${id}`);
+      router.refresh();
+    } catch(error) {
+      if(error instanceof AxiosError){
+      if (error.response && error.response.status === 403) {
+        if (error.response.data.error === 'You cannot approve or reject your own post') {
+          toast.error("Sorry! You cannot Aprove or Reject Your Own Post");
+        }
+      } else {
+        // handle other errors...
+      }
+    }
+    }
+  };
+
+
   return (
     <section className=" justify-center items-center relative w-full min-h-[500px] flex flex-col rounded-[80px] shadow-lg bg-pink-600 overflow-clip mb-5">
       <div className="absolute brightness-[0.95] transition-all duration-500 ease-in-out min-h-full min-w-full">
@@ -49,19 +94,24 @@ const PostCard = ({ name, partner, imageUrl, status }: Props) => {
           size={"8"}
           className=" mt-7 mb-3"
         />
-        <Text className=" text-pink-600 font-bold md:text-xl text-lg shadow-sm text-center font-handwriting">
+        <Text className=" text-pink-600 font-bold md:text-xl text-lg text-center font-handwriting">
           From {name}
         </Text>
         <div className="md:flex-row flex-col flex gap-2 mt-4">
           {status === "WAITING" && (
             <>
-              <Button variant="solid" size={"3"} className=" animate-pulse">
-                {" "}
-                <Link href={"/sematary"}> Accept</Link>{" "}
+              <Button
+                variant="solid"
+                size={"3"}
+                className=" animate-pulse"
+                onClick={() => onApprove(id!)}
+              >
+                Accept
               </Button>
-              <Button variant="outline" size={"3"}>
+              
+              <Button variant="outline" size={"3"} onClick={() => onReject(id!)}>
                 {" "}
-                <Link href={"/about"}> Reject</Link>{" "}
+               Reject
               </Button>{" "}
             </>
           )}
@@ -78,11 +128,23 @@ const PostCard = ({ name, partner, imageUrl, status }: Props) => {
           <>
             <Text className="  text-pink-600 font-bold md:text-3xl text-xl ">
               {" "}
-              Sorry! The Askout Has Been Rejected!
+              Oh No! The Askout Has Been Rejected!
             </Text>{" "}
           </>
         )}
       </Flex>
+      <Toaster
+        position="top-center"
+        z-index={50}
+        reverseOrder={false}
+        gutter={8}
+        toastOptions={{
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+        }}
+      />
     </section>
   );
 };
