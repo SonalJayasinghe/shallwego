@@ -3,14 +3,19 @@ import { Button, Dialog, Text } from "@radix-ui/themes";
 import { useState } from "react";
 import { GrFormClose } from "react-icons/gr";
 import Form from "./Form";
+import { Post } from "@prisma/client";
 
-const CreatePost = () => {
+interface Props{
+  isLoading: boolean;
+  setPost: (post: Post) => void;
+}
+const CreatePost = ({isLoading, setPost}: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
-        <Button variant="solid" size="2" className=" w-[300px]">
+        <Button disabled={isLoading} variant="solid" size="2" className=" w-[300px]">
           Create an Askout
         </Button>
       </Dialog.Trigger>
@@ -30,7 +35,7 @@ const CreatePost = () => {
             You can send only one Askout at a time. You can send another one once your current Askout is deleted or rejected.
           </Text>
 
-          <Form setOpen={setOpen} />
+          <Form setPost={(post: Post) => setPost(post)} setOpen={setOpen} />
         </div>
       </Dialog.Content>
     </Dialog.Root>

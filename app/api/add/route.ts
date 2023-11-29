@@ -13,7 +13,7 @@ const schema = z.object({
 
 export async function POST(request: NextRequest) {
     const session = await getServerSession(AuthOptions);
-    // if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const body = await request.json();
     const validitity = schema.safeParse(body);

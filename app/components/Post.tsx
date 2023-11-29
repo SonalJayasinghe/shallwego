@@ -41,7 +41,7 @@ const PostCard = ({ name, partner, imageUrl, status }: Props) => {
         🙈🙈🙈🙈
         <Text className="  text-pink-800 font-bold md:text-5xl text-3xl ">
           {" "}
-          Will You Be My Love?
+          Will You Be My Social Date?
         </Text>{" "}
         <Avatar
           src={imageUrl}
