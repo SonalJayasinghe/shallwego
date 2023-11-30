@@ -81,7 +81,7 @@ const PostCard = ({ name, partner, imageUrl, status, id }: Props) => {
         </Text>{" "}
         <Text className="  text-pink-600 font-bold md:text-3xl text-xl ">
           {" "}
-          I've Got a Sweet Question For You
+          I&apos;ve Got a Sweet Question For You
         </Text>{" "}
         🙈🙈🙈🙈
         <Text className="  text-pink-800 font-bold md:text-5xl text-3xl ">

@@ -10,12 +10,12 @@ const TermsAndConditions = () => {
       <div className="max-w-2xl mx-auto mt-8 p-4">
         <h1 className="text-3xl font-bold mb-4">Terms and Conditions</h1>
         <Text>
-          Welcome to "Shall We Go"! Before using our services, please take a moment to read and understand our terms and conditions. By accessing or using our website, you agree to comply with and be bound by the following terms. If you do not agree with these terms, please refrain from using our services.
+          Welcome to Shall We Go! Before using our services, please take a moment to read and understand our terms and conditions. By accessing or using our website, you agree to comply with and be bound by the following terms. If you do not agree with these terms, please refrain from using our services.
         </Text>
 
         <h2 className="text-xl font-bold mt-4">1. Independent Platform</h2>
         <Text>
-          "Shall We Go" is an independent platform and is not affiliated with any events or organizations. We operate as a standalone service for users to send prom date askouts.
+          Shall We Go is an independent platform and is not affiliated with any events or organizations. We operate as a standalone service for users to send prom date askouts.
         </Text>
 
         <h2 className="text-xl font-bold mt-4">2. No Guarantee of Approval</h2>
@@ -25,7 +25,7 @@ const TermsAndConditions = () => {
 
         <h2 className="text-xl font-bold mt-4">3. Personal Responsibility</h2>
         <Text>
-          Users are solely responsible for their prom date arrangements and personal conduct. "Shall We Go" does not assume any responsibility for the outcomes of prom date requests or personal matters. Personal responsibility lies with the user.
+          Users are solely responsible for their prom date arrangements and personal conduct. Shall We Go does not assume any responsibility for the outcomes of prom date requests or personal matters. Personal responsibility lies with the user.
         </Text>
 
         <h2 className="text-xl font-bold mt-4">4. Appropriate Content</h2>
@@ -35,7 +35,7 @@ const TermsAndConditions = () => {
 
         <h2 className="text-xl font-bold mt-4">5. Pilot Website</h2>
         <Text>
-          "Shall We Go" is a pilot website for a larger project. Users are encouraged to provide feedback to help improve our services as we work towards our broader goals.
+          Shall We Go is a pilot website for a larger project. Users are encouraged to provide feedback to help improve our services as we work towards our broader goals.
         </Text>
 
         <h2 className="text-xl font-bold mt-4">6. Privacy and Data Protection</h2>
@@ -49,12 +49,12 @@ const TermsAndConditions = () => {
         </Text>
 
         <Text className="mt-4">
-          By using "Shall We Go," you acknowledge and agree to these terms and conditions. We reserve the right to update or modify these terms at any time, and it is your responsibility to review them periodically. Continued use of our services after any changes constitute your acceptance of the revised terms.
+          By using Shall We Go, you acknowledge and agree to these terms and conditions. We reserve the right to update or modify these terms at any time, and it is your responsibility to review them periodically. Continued use of our services after any changes constitute your acceptance of the revised terms.
         </Text>
 
             <br/><br/>
         <Text className="mt-4">
-          Thank you for choosing "Shall We Go" for your prom date askouts!
+          Thank you for choosing Shall We Go for your prom date askouts!
         </Text>
       </div>
     </Fragment>

@@ -12,7 +12,7 @@ import { useEdgeStore } from "../lib/edgestore";
 import CountCard from "./CountCard";
 import StatusCard from "./StatusCard";
 
-export const Admin = () => {
+ const AdminPage = () => {
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [disabled, setDisabled] = useState(false);
@@ -134,4 +134,4 @@ export const Admin = () => {
     </>
   );
 };
-export default Admin;
+export default AdminPage;
