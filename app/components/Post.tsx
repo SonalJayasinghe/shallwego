@@ -23,6 +23,8 @@ const PostCard = ({ name, partner, imageUrl, status, id }: Props) => {
       //catch the error text from the api
       router.push(`/askout/${id}`);
       router.refresh();
+      toast.success(" Take a Screenshot and Share it with your friends!");
+
     } catch(error) {
       if(error instanceof AxiosError){
       if (error.response && error.response.status === 403) {
@@ -30,7 +32,7 @@ const PostCard = ({ name, partner, imageUrl, status, id }: Props) => {
           toast.error("Sorry! You cannot Aprove or Reject Your Own Post");
         }
       } else {
-        // handle other errors...
+        toast.error("Hmm... Something Wrong");
       }
     }
     }
@@ -46,10 +48,10 @@ const PostCard = ({ name, partner, imageUrl, status, id }: Props) => {
       if(error instanceof AxiosError){
       if (error.response && error.response.status === 403) {
         if (error.response.data.error === 'You cannot approve or reject your own post') {
-          toast.error("Sorry! You cannot Aprove or Reject Your Own Post");
+          toast.error("Sorry! You Cannot Aprove or Reject Your Own Post");
         }
       } else {
-        // handle other errors...
+        toast.error("Hmm... Something Wrong");
       }
     }
     }
@@ -138,6 +140,9 @@ const PostCard = ({ name, partner, imageUrl, status, id }: Props) => {
         reverseOrder={false}
         gutter={8}
         toastOptions={{
+          success:{
+            duration: 5000,
+          },
           style: {
             background: "#363636",
             color: "#fff",

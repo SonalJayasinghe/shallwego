@@ -14,7 +14,7 @@ const Home = () => {
         </Text>
         <Text align={'center'} className=" md:text-6xl text-xl font-semibold text-pink-600">
           {" "}
-          Create Askout・Send For Approval
+          Create Askout・Wait For Yes
         </Text>
 
         <div role="button" onClick={() => {
@@ -27,7 +27,7 @@ const Home = () => {
               <Text className="md:text-4xl text-2xl font-semibold items-center"> Let&apos;s Create</Text>
             </div>
             <div>
-              <FaCircleArrowRight size={'40'}/>
+              <FaCircleArrowRight size={'32'}/>
             </div>
           </div>
         </div>

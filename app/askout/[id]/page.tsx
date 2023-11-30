@@ -1,9 +1,8 @@
 import PostCard from "@/app/components/Post";
 import prisma from "@/prisma/client";
-import React from "react";
-import { Metadata } from "next";
 import openGraphImage from "@/public/images/opengThumb.jpg";
-
+import { Text } from "@radix-ui/themes";
+import { Metadata } from "next";
 
 interface Props {
   params: { id: string };
@@ -21,7 +20,7 @@ const PostPage = async ({ params }: Props) => {
 
   return (
     <>
-      {post && (
+      {post ? 
         <PostCard
           id={post.id}
           name={post?.name}
@@ -29,11 +28,15 @@ const PostPage = async ({ params }: Props) => {
           imageUrl={post.imageUrl!}
           status={post.status}
         />
-      )}
+      :
+      <div className="flex justify-center items-center min-h-full">
+        <Text align={'center'} className="text-2xl font-semibold">Sorry! This Askout is not available</Text>
+      </div>}
     </>
   );
 };
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
   title: 'Will You Accept?',
   openGraph: {
     ...openGraphImage,

@@ -31,7 +31,7 @@ const CountCard = () => {
             {ApprovedAskouts} Partners
           </Text>
           <Text as="div" size="2" color="gray" align={"center"}>
-            Accepted Invitations
+            Has Been Approved From This Website
           </Text>
         </div>
         <div className=" hover:text-pink-600 transition-colors">

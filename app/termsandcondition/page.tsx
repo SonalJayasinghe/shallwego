@@ -40,16 +40,16 @@ const TermsAndConditions = () => {
 
         <h2 className="text-xl font-bold mt-4">6. Privacy and Data Protection</h2>
         <Text>
-          We prioritize the privacy and security of your personal information. We will never share your email, name, images, or any other personal data with third parties without your explicit consent.
+          We prioritize the privacy and security of your personal information. We will never share your email, name, images, or any other personal data with third parties without your explicit consent. All the images will be deleted from our server after 20th of December 2023.
         </Text>
 
         <h2 className="text-xl font-bold mt-4">7. Account Deletion and Password Change</h2>
         <Text>
-          To delete your account and all associated information, please send an email to <a href="mailto:talexitinfo@gmail.com" className="text-blue-500 underline">talexitinfo@gmail.com</a>. We will process your request promptly and confirm the deletion of your account.
+          To delete your account and all associated information, please send an email to <a href="mailto:talexitinfo@gmail.com" className="text-blue-500 underline">talexitinfo@gmail.com</a>. We will process your request promptly and confirm the deletion of your account. However, all the accounts, assosiated information will deleted from our server after 20th of December 2023.
         </Text>
 
         <Text className="mt-4">
-          By using Shall We Go, you acknowledge and agree to these terms and conditions. We reserve the right to update or modify these terms at any time, and it is your responsibility to review them periodically. Continued use of our services after any changes constitute your acceptance of the revised terms.
+          <br/><br/>By using Shall We Go, you acknowledge and agree to these terms and conditions. We reserve the right to update or modify these terms at any time, and it is your responsibility to review them periodically. Continued use of our services after any changes constitute your acceptance of the revised terms.
         </Text>
 
             <br/><br/>

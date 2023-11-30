@@ -33,6 +33,7 @@ const RegistrationForm = () => {
         if (error.response && error.response.status === 400) {
           if (error.response.data.error === "User already exists") {
             toast.error("Email Already Exists");
+            reset();
           }
         } else {
           toast.error("Sorry! Something Went Wrong");
@@ -91,7 +92,7 @@ const RegistrationForm = () => {
             </Text>
           )}
           <div className=" flex items-center space-x-2">
-            <Checkbox size="1" required />
+            <Checkbox size="1" required/>
             <Link href={"/termsandcondition"}>
               {" "}
               Agree to Terms and Conditions{" "}
