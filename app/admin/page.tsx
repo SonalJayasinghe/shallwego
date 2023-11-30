@@ -66,7 +66,7 @@ import StatusCard from "./StatusCard";
               <div className=" flex flex-row gap-3 justify-between">
                 <Button
                   onClick={() => {
-                    copy(`http://localhost:3000/askout/${post.id}`);
+                    copy(`${process.env.NEXT_PUBLIC_BASE_URL}/askout/${post.id}`);
                     toast.success("Link Copied to Clipboard");
                   }}
                 >

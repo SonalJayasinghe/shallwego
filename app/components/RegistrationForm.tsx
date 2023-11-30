@@ -64,6 +64,7 @@ const RegistrationForm = () => {
           <TextField.Input
             radius="full"
             type="password"
+            minLength={5}
             placeholder="Your Password"
             {...register("password", {
               required: "* Password is requiered",
