@@ -8,11 +8,11 @@ const Home = () => {
   return (
     <>
       <div className="flex flex-col min-h-full items-center justify-center">
-        <Text align={'center'} className=" md:text-8xl text-6xl font-bold text-pink-700">
+        <Text align={'center'} className=" md:text-8xl text-6xl font-bold text-pink-700 mb-3">
           {" "}
           ARE YOU SHY TO ASKOUT?
         </Text>
-        <Text align={'center'} className=" md:text-6xl text-3xl font-semibold text-pink-600">
+        <Text align={'center'} className=" md:text-6xl text-3xl font-semibold text-pink-600 mb-3">
           {" "}
           We Got You Covered
         </Text>
@@ -22,12 +22,13 @@ const Home = () => {
           router.refresh();
         }}>
           {" "}
-          <div className="flex gap-4 items-center hover:translate-x-[10px] transition ease-in p-3 hover:bg-pink-600 rounded-full hover:text-slate-100">
-            <Text className="md:text-4xl text-2xl font-semibold mb-5"> Let&apos;s Create</Text>
+          <div className="flex space-x-2 items-center hover:translate-x-[10px] transition ease-in p-3 hover:bg-pink-600 rounded-full hover:text-slate-100">
             <div>
-            <FaCircleArrowRight size={'40'}/>
+              <Text className="md:text-4xl text-2xl font-semibold items-center"> Let&apos;s Create</Text>
             </div>
-
+            <div>
+              <FaCircleArrowRight size={'40'}/>
+            </div>
           </div>
         </div>
       </div>

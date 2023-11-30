@@ -4,6 +4,7 @@ import { useState } from "react";
 import { GrFormClose } from "react-icons/gr";
 import Form from "./Form";
 import { Post } from "@prisma/client";
+import TriggerButton from "./TriggerButton";
 
 interface Props{
   isLoading: boolean;
@@ -15,9 +16,7 @@ const CreatePost = ({isLoading, setPost}: Props) => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
-        <Button disabled={isLoading} variant="solid" size="2" className=" w-[300px]">
-          Create an Askout
-        </Button>
+       <div role="button"> <TriggerButton isDisabled={isLoading} /> </div>
       </Dialog.Trigger>
 
       <Dialog.Content>

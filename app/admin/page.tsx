@@ -55,6 +55,7 @@ import StatusCard from "./StatusCard";
               setPost={(post: Post) => setPost(post)}
               isLoading={loading}
             />
+          
           )}
           {post && (
             <>
