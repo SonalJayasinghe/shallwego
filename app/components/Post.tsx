@@ -3,7 +3,6 @@ import heroBG from "@/public/images/BGImage.webp";
 import { Avatar, Button, Flex, Text } from "@radix-ui/themes";
 import axios, { AxiosError } from "axios";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -58,7 +57,7 @@ const PostCard = ({ name, partner, imageUrl, status, id }: Props) => {
 
 
   return (
-    <section className=" justify-center items-center relative w-full min-h-[500px] flex flex-col rounded-[80px] shadow-lg bg-pink-600 overflow-clip mb-5">
+    <section className=" justify-center items-center relative w-full min-h-[500px] flex flex-col rounded-[40px] shadow-lg bg-pink-600 overflow-clip mb-5">
       <div className="absolute brightness-[0.95] transition-all duration-500 ease-in-out min-h-full min-w-full">
         <Image
           src={heroBG}

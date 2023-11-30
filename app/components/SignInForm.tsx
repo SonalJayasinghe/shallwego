@@ -1,18 +1,13 @@
 import { Button, Flex, Text, TextField } from "@radix-ui/themes";
-import axios, { AxiosError } from "axios";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { BiLoaderCircle } from "react-icons/bi";
 
-
+interface Prop {
+  setRouting: (isRouting: boolean) => void; 
+}
 
 const SignInForm = () => {
-
-  const [isSubmiting, setSubmiting] = useState(false);
-
   //Form and edgestore
   const {
     register,
@@ -20,37 +15,27 @@ const SignInForm = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const router = useRouter();
 
   //Handling the onsubmit event
   const onHandleSubmit = handleSubmit(async (data) => {
-
-      
     try {
-      const result = await signIn('credentials', {
+      const result = await signIn("credentials", {
         redirect: false,
-        ...data
-      })
-      reset();       
-      if(result?.error){
+        ...data,
+      });
+      reset();
+      if (result?.error) {
         toast.error(" Email or Password is Incorrect");
         return;
-      }     
-      toast.success("Login Succesful");
-    
-    } catch (error) {
-      
-    }
-    router.push("/admin");
-    router.refresh();
-    
-      });
+      }
+    } catch (error) {}
+
+  });
 
   return (
     <>
       <form onSubmit={onHandleSubmit}>
         <Flex direction="column" gap="3">
-         
           <TextField.Input
             radius="full"
             placeholder=" Your Email"
@@ -82,17 +67,7 @@ const SignInForm = () => {
             </Text>
           )}
 
-
-          <Button disabled={isSubmiting}>
-            {isSubmiting ? (
-              <>
-                {" "}
-                <BiLoaderCircle className=" animate-ping" /> Signing...{" "}
-              </>
-            ) : (
-              <>Sign In </>
-            )}
-          </Button>
+          <Button>Sign In</Button>
         </Flex>
       </form>
 

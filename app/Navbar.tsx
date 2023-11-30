@@ -3,11 +3,9 @@ import { Avatar, Button, DropdownMenu, Text } from "@radix-ui/themes";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
-import CustomLogin from "./components/CustomLogin";
 
 const Navbar = () => {
   const { status, data: session } = useSession();
-  const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
@@ -49,17 +47,13 @@ const Navbar = () => {
               <div className=" flex space-x-4 justify-center items-center">
                 <Button>
                   {" "}
-                  <Link href={"/auth"} onClick={() => setShowLogin(!showLogin)}>
-                    {" "}
-                    Sign In{" "}
-                  </Link>{" "}
+                  <Link href={"/auth"}> Sign In </Link>{" "}
                 </Button>
               </div>
             )}
           </div>
         </nav>
       </div>
-      {showLogin && <CustomLogin onClose={() => setShowLogin(false)} />}
     </>
   );
 };

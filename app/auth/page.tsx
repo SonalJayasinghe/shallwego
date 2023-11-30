@@ -1,18 +1,26 @@
 "use client";
 import { Tabs, Box, Text } from "@radix-ui/themes";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RegistrationForm from "../components/RegistrationForm";
 import SignInForm from "../components/SignInForm";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const AuthPage = () => {
-  const session = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
-  if(session.data?.user?.email){
-    router.push("/admin");
-    router.refresh();
+
+  useEffect(() => {
+    if (session) {
+      router.push('/admin');
+    }
+  }, [session, router]);
+
+  if (session) {
+    return null;
   }
+  
+
   return (
     <>
       <div className=" flex min-h-screen mt-3 justify-center ">

@@ -15,13 +15,16 @@ const RegistrationForm = () => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm();
   const router = useRouter();
+  const password = watch("password");
 
   //Handling the onsubmit event
-  const onHandleSubmit = handleSubmit(async (data) => {
+  const onHandleSubmit = handleSubmit(async ({ confirmPassword, ...data }) => {
     try {
+      console.log(data);
       await axios.post("/api/register", data);
       reset();
       toast.success(" Account Created Succesfully. Please Sign In");
@@ -57,7 +60,6 @@ const RegistrationForm = () => {
               {errors.email?.message?.toString()}{" "}
             </Text>
           )}
-
           <TextField.Input
             radius="full"
             type="password"
@@ -66,22 +68,35 @@ const RegistrationForm = () => {
               required: "* Password is requiered",
             })}
           />
-
           {errors.password && (
             <Text size={"1"} color="red">
               {" "}
               {errors.password?.message?.toString()}{" "}
             </Text>
           )}
-
-          <Flex direction="column" gap="3">
-            <Text as="label" size="2">
-              <Flex gap="2">
-                <Checkbox size="1" required/> Agree to <Link href={'/termsandcondition'}>Terms and
-                Conditions </Link>
-              </Flex>
+          <TextField.Input
+            radius="full"
+            type="password"
+            placeholder="Confirm Your Password"
+            {...register("confirmPassword", {
+              required: "* Confirmation Password is required",
+              validate: (value) =>
+                value === password || "The passwords do not match",
+            })}
+          />
+          {errors.confirmPassword && (
+            <Text size={"1"} color="red">
+              {" "}
+              {errors.confirmPassword?.message?.toString()}{" "}
             </Text>
-          </Flex>
+          )}
+          <div className=" flex items-center space-x-2">
+            <Checkbox size="1" required />
+            <Link href={"/termsandcondition"}>
+              {" "}
+              Agree to Terms and Conditions{" "}
+            </Link>
+          </div>
           <Button disabled={isSubmiting}>
             {isSubmiting ? (
               <>
