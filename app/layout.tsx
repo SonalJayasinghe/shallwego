@@ -1,5 +1,5 @@
-import "@radix-ui/themes/styles.css";
 import "./globals.css";
+import "@radix-ui/themes/styles.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Theme } from "@radix-ui/themes";
@@ -15,7 +15,8 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Shall we go",
   description: "Would you like to go with me to the Social?",
-};``
+};
+``;
 
 export default function RootLayout({
   children,
