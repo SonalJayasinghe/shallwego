@@ -24,6 +24,7 @@ const RegistrationForm = () => {
 
   //Handling the onsubmit event
   const onHandleSubmit = handleSubmit(async ({ confirmPassword, ...data }) => {
+    setSubmiting(true);
     try {
       const response = await axios.post("/api/register", data);
       if (response.data.status === 200) {
@@ -33,6 +34,7 @@ const RegistrationForm = () => {
           password: data.password
         });
       }
+      setSubmiting(false);
       reset();
     } catch (error) {
       if (error instanceof AxiosError) {
