@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { BiLoaderCircle } from "react-icons/bi";
+import { signIn } from "next-auth/react";
 
 const RegistrationForm = () => {
   const [isSubmiting, setSubmiting] = useState(false);
@@ -24,10 +25,15 @@ const RegistrationForm = () => {
   //Handling the onsubmit event
   const onHandleSubmit = handleSubmit(async ({ confirmPassword, ...data }) => {
     try {
-      console.log(data);
-      await axios.post("/api/register", data);
+      const response = await axios.post("/api/register", data);
+      if (response.data.status === 200) {
+        signIn("credentials", {
+          redirect: false,
+          email: data.email,
+          password: data.password
+        });
+      }
       reset();
-      toast.success(" Account Created Succesfully. Please Sign In");
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response && error.response.status === 400) {
@@ -47,6 +53,22 @@ const RegistrationForm = () => {
     <>
       <form onSubmit={onHandleSubmit}>
         <Flex direction="column" gap="3">
+
+        <TextField.Input
+            radius="full"
+            placeholder=" Your Name"
+            type="name"
+            {...register("name", {
+              required: "* Your Name is Required",
+            })}
+          />
+          {errors.email && (
+            <Text size={"1"} color="red">
+              {" "}
+              {errors.email?.message?.toString()}{" "}
+            </Text>
+          )}
+
           <TextField.Input
             radius="full"
             placeholder=" Your Email"

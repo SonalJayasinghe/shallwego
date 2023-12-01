@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const post = await prisma.post.findUnique({
         where: {
             email: session?.user?.email!
-        }
+        },
     })
     return NextResponse.json(post);
 }

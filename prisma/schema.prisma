@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -65,13 +65,13 @@ model VerificationToken {
 }
 
 model Post {
-  id       String  @id @default(cuid())
-  name     String
-  partner  String
-  status   STATUS @default(WAITING)
-  imageUrl String?
-  user     User    @relation(fields: [email], references: [email], onDelete: Cascade)
-  email   String @unique
+  id        String   @id @default(cuid())
+  name      String
+  partner   String
+  status    STATUS   @default(WAITING)
+  imageUrl  String?
+  user      User     @relation(fields: [email], references: [email], onDelete: Cascade)
+  email     String   @unique
   createdAt DateTime @default(now())
 }
 

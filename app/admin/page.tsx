@@ -12,7 +12,7 @@ import { useEdgeStore } from "../lib/edgestore";
 import CountCard from "./CountCard";
 import StatusCard from "./StatusCard";
 
- const AdminPage = () => {
+const AdminPage = () => {
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [disabled, setDisabled] = useState(false);
@@ -55,18 +55,28 @@ import StatusCard from "./StatusCard";
               setPost={(post: Post) => setPost(post)}
               isLoading={loading}
             />
-          
           )}
           {post && (
             <>
-              { (post.status === 'WAITING' || post.status === 'APPROVED') && <Text align={'center'}> Copy the link and send to the partner </Text>}
-              { post.status === 'REJECTED' && <Text align={'center'}> Delete the current Askout to create a new Askout </Text>}
-
+              {(post.status === "WAITING" || post.status === "APPROVED") && (
+                <Text align={"center"}>
+                  {" "}
+                  Copy the link and send to the partner{" "}
+                </Text>
+              )}
+              {post.status === "REJECTED" && (
+                <Text align={"center"}>
+                  {" "}
+                  Delete the current Askout to create a new Askout{" "}
+                </Text>
+              )}
 
               <div className=" flex flex-row gap-3 justify-between">
                 <Button
                   onClick={() => {
-                    copy(`${process.env.NEXT_PUBLIC_BASE_URL}/askout/${post.id}`);
+                    copy(
+                      `${process.env.NEXT_PUBLIC_BASE_URL}/askout/${post.id}`
+                    );
                     toast.success("Link Copied to Clipboard");
                   }}
                 >
@@ -74,8 +84,7 @@ import StatusCard from "./StatusCard";
                   Copy Link{" "}
                 </Button>
                 <Button
-                  disabled={disabled || post.status === 'APPROVED'}
-
+                  disabled={disabled || post.status === "APPROVED"}
                   variant={"surface"}
                   onClick={async () => {
                     setDisabled(true);
@@ -89,10 +98,10 @@ import StatusCard from "./StatusCard";
               </div>
             </>
           )}
-            <CountCard/>
+          <CountCard />
         </div>
 
-        <StatusCard status={post?.status || 'DEFAULT'}/>
+        <StatusCard status={post?.status || "DEFAULT"} />
       </div>
 
       <div className="flex justify-center items-center mt-10">
