@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Shall we go",
-  description: "Would you like to go with me to the Social?",
+  description: "Would you like to go with me to this event?",
 };
 ``;
 
