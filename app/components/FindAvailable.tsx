@@ -1,10 +1,12 @@
-'use client'
+"use client";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Button, Switch, Text } from "@radix-ui/themes";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { GiPerspectiveDiceSixFacesTwo } from "react-icons/gi";
+import { set } from "zod";
 
 type NameObject = {
   name: string;
@@ -23,11 +25,18 @@ const OscillatingIcon = styled.div`
 `;
 
 const FindAvailable = () => {
-  
   const [names, setNames] = useState<NameObject[]>([]);
-  const [randomName, setRandomName] = useState<string>(
+  const [randomName, setRandomName] = useState(
     "Roll the Dice to Find Your Pal!"
   );
+  const [available, setAvailable] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("/api/changeAvailability")
+      .then((response) => setAvailable(response.data.lookingFor))
+      .catch((error) => console.error(error));
+  }, []);
 
   useEffect(() => {
     axios
@@ -52,6 +61,23 @@ const FindAvailable = () => {
     }, 1000);
   };
 
+  const handleAvailable = () => {
+    axios
+      .patch("/api/changeAvailability")
+      .then((response) => {
+        setAvailable(response.data.lookingFor);
+        if(response.data.lookingFor){
+        toast.success(" Others Can See Your Name Through The Dice!");
+        }
+        else{
+          toast.error(" No One Can See Your Name Through The Dice!");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <>
       <div>
@@ -72,13 +98,36 @@ const FindAvailable = () => {
         <div className="flex flex-col justify-center items-center mt-3 w-full h-[100px] bg-pink-100 rounded-2xl pl-5 pr-5 gap-2">
           <div className="flex flex-col-2 gap-3 justify-between pl-5 pr-5">
             <Text className="font-semibold"> I&apos;m Looking For Pal </Text>
-            <Switch size={"3"} />
+            <Switch
+              size={"3"}
+              onClick={handleAvailable}
+              checked={available}
+            />
           </div>
           <div className="flex">
-            <Text size={'2'} align={'center'}> When You Enable This, Others Can See Your Name Though The Dice. </Text>
+            <Text size={"2"} align={"center"}>
+              {" "}
+              When You Enable This, Others Can See Your Name Though The Dice.{" "}
+            </Text>
           </div>
         </div>
       </div>
+
+      <Toaster
+        position="top-center"
+        z-index={50}
+        reverseOrder={false}
+        gutter={8}
+        toastOptions={{
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+          success:{
+            duration: 4000
+          }
+        }}
+      />
     </>
   );
 };
