@@ -98,12 +98,12 @@ const PostCard = ({ name, partner, imageUrl, status, id }: Props) => {
         <Text className=" text-pink-600 font-bold md:text-xl text-lg text-center font-handwriting">
           From {name}
         </Text>
-        <div className="md:flex-row flex-col flex gap-4 mt-4">
+        <div className="md:flex-row flex-col flex gap-4 mt-4 md:items-center">
           {status === "WAITING" && (
             <>
               <Button
                 variant="solid"
-                size={"3"}
+                size={"4"}
                 className=" animate-pulse"
                 onClick={() => onApprove(id!)}
               >

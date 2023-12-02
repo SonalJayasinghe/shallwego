@@ -11,6 +11,7 @@ import PostCard from "../components/Post";
 import { useEdgeStore } from "../lib/edgestore";
 import CountCard from "./CountCard";
 import StatusCard from "./StatusCard";
+import FindAvailable from "../components/FindAvailable";
 
 const AdminPage = () => {
   const [post, setPost] = useState<Post | null>(null);
@@ -117,18 +118,19 @@ const AdminPage = () => {
         )}
       </div>
 
-      <div className=" pointer-events-none">
-        {post && (
-          <>
-            <PostCard
-              name={post.name}
-              partner={post.partner}
-              imageUrl={post.imageUrl!}
-              status={post.status}
-            />
-          </>
-        )}
-      </div>
+      {post ? (
+        <div className=" pointer-events-none">
+          <PostCard
+            name={post.name}
+            partner={post.partner}
+            imageUrl={post.imageUrl!}
+            status={post.status}
+          />
+        </div>
+      ) : loading ? null : (
+       <div className=" flex justify-center"> <FindAvailable/> </div>
+      )}
+
       <Toaster
         position="top-center"
         z-index={50}
