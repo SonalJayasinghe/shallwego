@@ -2,7 +2,6 @@ import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { z } from "zod"
-import { signIn } from "next-auth/react";
 
 const schema = z.object({
     email: z.string().email(),
@@ -20,7 +19,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "User already exists" }, { status: 400 });
     }
     const hashedPassword = await bcrypt.hash(body.password, 10);
-    const newUser = await prisma.user.create({ data: { email: body.email, hashedPassword: hashedPassword, name: body.name } });
+    const newUser = await prisma.user.create({ data: { email: body.email, hashedPassword: hashedPassword, name: body.name, gender: body.gender } });
 
     if (newUser) {
         return NextResponse.json({ email: newUser.email, status: 200 });

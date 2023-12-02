@@ -1,9 +1,16 @@
-import { Button, Checkbox, Flex, Text, TextField } from "@radix-ui/themes";
+import {
+  Button,
+  Checkbox,
+  Flex,
+  Select,
+  Text,
+  TextField,
+} from "@radix-ui/themes";
 import Link from "next/link";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { BiLoaderCircle } from "react-icons/bi";
 import { signIn } from "next-auth/react";
@@ -17,6 +24,7 @@ const RegistrationForm = () => {
     handleSubmit,
     reset,
     watch,
+    control,
     formState: { errors },
   } = useForm();
   const router = useRouter();
@@ -31,13 +39,15 @@ const RegistrationForm = () => {
         signIn("credentials", {
           redirect: false,
           email: data.email,
-          password: data.password
+          password: data.password,
         });
       }
       setSubmiting(false);
       reset();
     } catch (error) {
       if (error instanceof AxiosError) {
+        setSubmiting(false);
+
         if (error.response && error.response.status === 400) {
           if (error.response.data.error === "User already exists") {
             toast.error("Email Already Exists");
@@ -55,11 +65,11 @@ const RegistrationForm = () => {
     <>
       <form onSubmit={onHandleSubmit}>
         <Flex direction="column" gap="3">
-
-        <TextField.Input
+          <TextField.Input
             radius="full"
             placeholder=" Your Name"
             type="name"
+            disabled={isSubmiting}
             {...register("name", {
               required: "* Your Name is Required",
             })}
@@ -71,10 +81,37 @@ const RegistrationForm = () => {
             </Text>
           )}
 
+          <Controller
+            name="gender"
+            control={control}
+            defaultValue={""}
+            rules={{ required: "* Please Select Your Gender" }}
+            render={({ field: {ref, ...field} }) => (
+              <Select.Root
+                onValueChange={field.onChange}
+                disabled={isSubmiting}
+              >
+                <Select.Trigger placeholder="Select Your Gender" />
+                <Select.Content position="popper" {...field}
+                >
+                  <Select.Item value="MALE"> Male </Select.Item>
+                  <Select.Item value="FEMALE"> Female </Select.Item>
+                </Select.Content>
+              </Select.Root>
+            )}
+          />
+          {errors.type && (
+            <Text size={"1"} color="red">
+              {" "}
+              {errors.gender?.message?.toString()}{" "}
+            </Text>
+          )}
+
           <TextField.Input
             radius="full"
             placeholder=" Your Email"
             type="email"
+            disabled={isSubmiting}
             {...register("email", {
               required: "* Your Email is Required",
             })}
@@ -88,6 +125,7 @@ const RegistrationForm = () => {
           <TextField.Input
             radius="full"
             type="password"
+            disabled={isSubmiting}
             minLength={5}
             placeholder="Your Password"
             {...register("password", {
@@ -103,6 +141,7 @@ const RegistrationForm = () => {
           <TextField.Input
             radius="full"
             type="password"
+            disabled={isSubmiting}
             placeholder="Confirm Your Password"
             {...register("confirmPassword", {
               required: "* Confirmation Password is required",
@@ -117,7 +156,7 @@ const RegistrationForm = () => {
             </Text>
           )}
           <div className=" flex items-center space-x-2">
-            <Checkbox size="1" required/>
+            <Checkbox size="1" required />
             <Link href={"/termsandcondition"}>
               {" "}
               Agree to Terms and Conditions{" "}

@@ -48,6 +48,7 @@ model User {
   hashedPassword String?
   emailVerified  DateTime? @map("email_verified")
   image          String?
+  gender         GENDER?
   accounts       Account[]
   sessions       Session[]
   posts          Post[]
@@ -79,4 +80,9 @@ enum STATUS {
   WAITING
   APPROVED
   REJECTED
+}
+
+enum GENDER {
+  MALE
+  FEMALE
 }
