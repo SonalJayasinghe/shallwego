@@ -47,6 +47,7 @@ model User {
   email          String?   @unique
   hashedPassword String?
   emailVerified  DateTime? @map("email_verified")
+  lookingFor Boolean @default(false)
   image          String?
   gender         GENDER?
   accounts       Account[]
