@@ -122,7 +122,7 @@ const Form = ({ setOpen, setPost }: Props) => {
             {isUploading ? (
               <>
                 {" "}
-                <BiLoaderCircle className=" animate-ping" /> Posting...{" "}
+                <BiLoaderCircle className=" animate-ping" /> Creating...{" "}
               </>
             ) : (
               <>Post </>
